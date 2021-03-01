@@ -1,0 +1,338 @@
+<div id="filter" class="filter">
+    <div class="filter_top other_filter_top">
+        <span>所有分类></span>
+        <oj-bind-for-each data="[[dataProvider]]">
+            <template>
+                <oj-button class="oj-button-sm filter_prop" on-oj-action="[[remove]]">
+                    <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    <img slot="endIcon"
+                         src="css/images/delete.png"
+                         alt="image"
+                         width="20" height="20"/>
+                </oj-button>
+            </template>
+        </oj-bind-for-each>
+    </div>
+    <div class="special_filter_content oj-flex oj-sm-flex-wrap-nowrap">
+        <oj-tab-bar id="skinNavlist"
+                    edge="start"
+                    role="tablist"
+                    selection="{{selectedItem}}">
+            <ul>
+                <li id="clothing">
+                    <a href="#" aria-controls="clothing-tab-panel" id="clothing-tab">
+                        服装
+                    </a>
+                </li>
+                <li id="weapon">
+                    <a href="#" aria-controls="weapon-tab-panel" id="weapon-tab">
+                        武器
+                    </a>
+                </li>
+                <li id="ride">
+                    <a href="#" aria-controls="ride-tab-panel" id="ride-tab">
+                        乘骑
+                    </a>
+                </li>
+                <li id="accessory">
+                    <a href="#" aria-controls="accessory-tab-panel" id="accessory-tab">
+                        饰品
+                    </a>
+                </li>
+            </ul>
+        </oj-tab-bar>
+        <oj-switcher value="[[selectedItem]]">
+            <div slot="clothing"
+                 id="clothing-tab-panel"
+                 role="tabpanel"
+                 aria-labelledby="clothing-tab">
+                <div>
+                    <oj-list-view display="card"
+                                  data="[[clothingProvider]]"
+                                  selection-mode="single"
+                                  first-selected-item="{{firstSelectedItem}}"
+                                  on-selected-changed="[[handleSelectedChanged]]">
+                        <template slot="itemTemplate" data-oj-as="row">
+                            <div class="oj-flex" style="flex-wrap: nowrap">
+                                <oj-avatar slot="leading" size="lg" src="[[row.data.photo]]"></oj-avatar>
+                                <div class="oj-flex-item">
+                                    <div>
+                                        <strong><oj-bind-text value="[[row.data.name]]"></oj-bind-text></strong>
+                                    </div>
+                                    <div>
+                                        <span>类型:<oj-bind-text value="[[row.data.type]]"></oj-bind-text></span>
+                                    </div>
+                                    <span>品质:<oj-bind-text value="[[row.data.quality]]"></oj-bind-text></span>
+                                </div>
+                            </div>
+                        </template>
+                    </oj-list-view>
+                    <oj-paging-control data="[[clothingProvider]]" page-size="6"></oj-paging-control>
+                </div>
+            </div>
+            <div slot="weapon"
+                 id="weapon-tab-panel"
+                 role="tabpanel"
+                 aria-labelledby="weapon-tab">
+                <div>
+                    <oj-select-one value="sword"
+                                   label-hint="武器类型"
+                                   options="[[weaponTypeDP]]"
+                                   style="max-width:20em"
+                                   class="oj-sm-margin-5x-top"
+                                   on-value-changed="[[weaponValueChangedHandler]]">
+                    </oj-select-one>
+
+                    <oj-list-view id="weaponTypeList"
+                                  display="card"
+                                  data="[[weaponProvider]]"
+                                  selection-mode="single"
+                                  first-selected-item="{{firstSelectedItem}}"
+                                  on-selected-changed="[[handleSelectedChanged]]">
+                        <template slot="itemTemplate" data-oj-as="row">
+                            <div class="oj-flex" style="flex-wrap: nowrap">
+                                <oj-avatar slot="leading" size="lg" src="[[row.data.photo]]"></oj-avatar>
+                                <div class="oj-flex-item">
+                                    <div>
+                                        <strong><oj-bind-text value="[[row.data.name]]"></oj-bind-text></strong>
+                                    </div>
+                                    <div>
+                                        <span>类型:<oj-bind-text value="[[row.data.type]]"></oj-bind-text></span>
+                                    </div>
+                                    <span>品质:<oj-bind-text value="[[row.data.quality]]"></oj-bind-text></span>
+                                </div>
+                            </div>
+                        </template>
+                    </oj-list-view>
+                    <oj-paging-control data="[[weaponProvider]]" page-size="6"></oj-paging-control>
+                </div>
+            </div>
+            <div slot="ride"
+                 id="ride-tab-panel"
+                 role="tabpanel"
+                 aria-labelledby="ride-tab">
+                <oj-list-view display="card"
+                              data="[[rideProvider]]"
+                              selection-mode="single"
+                              first-selected-item="{{firstSelectedItem}}"
+                              on-selected-changed="[[handleSelectedChanged]]">
+                    <template slot="itemTemplate" data-oj-as="row">
+                        <div class="oj-flex" style="flex-wrap: nowrap">
+                            <oj-avatar slot="leading" size="lg" src="[[row.data.photo]]"></oj-avatar>
+                            <div class="oj-flex-item">
+                                <div>
+                                    <strong><oj-bind-text value="[[row.data.name]]"></oj-bind-text></strong>
+                                </div>
+                                <div>
+                                    <span>类型:<oj-bind-text value="[[row.data.type]]"></oj-bind-text></span>
+                                </div>
+                                <span>品质:<oj-bind-text value="[[row.data.quality]]"></oj-bind-text></span>
+                            </div>
+                        </div>
+                    </template>
+                </oj-list-view>
+                <oj-paging-control data="[[rideProvider]]" page-size="6"></oj-paging-control>
+            </div>
+
+            <div slot="accessory"
+                 id="accessory-tab-panel"
+                 role="tabpanel"
+                 aria-labelledby="accessory-tab" >
+                <div class="demo-tab-content">
+                    <oj-select-one value="cape"
+                                   label-hint="饰品类型"
+                                   options="[[accessoryTypeDP]]"
+                                   style="max-width:20em"
+                                   class="oj-sm-margin-5x-top"
+                                   on-value-changed="[[accessoryValueChangedHandler]]">
+                    </oj-select-one>
+
+                    <oj-list-view id="accessoryTypeList"
+                                  display="card"
+                                  data="[[accessoryProvider]]"
+                                  selection-mode="single"
+                                  first-selected-item="{{firstSelectedItem}}"
+                                  on-selected-changed="[[handleSelectedChanged]]">
+                        <template slot="itemTemplate" data-oj-as="row">
+                            <div class="oj-flex" style="flex-wrap: nowrap">
+                                <oj-avatar slot="leading" size="lg" src="[[row.data.photo]]"></oj-avatar>
+                                <div class="oj-flex-item">
+                                    <div>
+                                        <strong><oj-bind-text value="[[row.data.name]]"></oj-bind-text></strong>
+                                    </div>
+                                    <div>
+                                        <span>类型:<oj-bind-text value="[[row.data.type]]"></oj-bind-text></span>
+                                    </div>
+                                    <span>品质:<oj-bind-text value="[[row.data.quality]]"></oj-bind-text></span>
+                                </div>
+                            </div>
+                        </template>
+                    </oj-list-view>
+                    <oj-paging-control data="[[accessoryProvider]]" page-size="6"></oj-paging-control>
+                </div>
+            </div>
+        </oj-switcher>
+    </div>
+
+    <div class="filter_advanced other_filter_advanced">
+        <div class="placeholder"></div>
+        <div class="placeholder"></div>
+        <div class="placeholder"></div>
+
+        <div id='buttons-container'>
+            <oj-button id="icon_button2" chroming="solid" on-oj-action="[[search]]">
+                点击搜索
+                <img slot="startIcon"
+                     src="css/images/sousuo.png"
+                     alt="image"
+                     width="20" height="20"/>
+            </oj-button>
+        </div>
+    </div>
+
+    <div id="dialogWrapper">
+        <oj-dialog style="display:none" id="dialogWithUserDefinedHeader">
+            <div slot="header">
+                <h1 id="dialogTitleId" class="oj-dialog-title"> 错误
+                    <span role="img" class="oj-icon-color-danger oj-ux-ico-error-s"></span>
+                </h1>
+            </div>
+            <div slot="body">
+                最多选择 5 件风物志!
+            </div>
+            <div slot="footer">
+                <oj-button id="okButton" on-oj-action="[[handleOKClose]]">
+                    OK
+                </oj-button>
+            </div>
+        </oj-dialog>
+    </div>
+</div>
+<div class="wrapper_content">
+    <oj-switcher value="[[switcherSelectedItem]]">
+        <div id="initial"  slot="initial" >
+            <div>
+                <img src="css/images/initial.png"/>
+            </div>
+        </div>
+
+        <div id="pagingControl" slot="pagingControl">
+            <oj-table id='table' aria-label='Roles Table'
+                      data='[[pagingDataProvider]]'
+                      selection-mode='{"row": "single"}'
+                      columns-default.sortable='disabled'
+                      style='width: 100%;'
+                      columns='[{"headerText": "编号",
+                                  "field": "roleID",
+                                  "headerClassName": "oj-typography-subheading-sm"
+                              }, {
+                                  "headerText": "角色名称",
+                                  "field": "name",
+                                  "headerClassName": "oj-typography-subheading-sm"
+                              }, {
+                                  "headerText": "性别",
+                                  "field": "gender",
+                                  "headerClassName": "oj-typography-subheading-sm"
+                              }, {
+                                  "headerText": "所属宗派",
+                                  "field": "school",
+                                  "headerClassName": "oj-typography-subheading-sm"
+                              }, {
+                                  "headerText": "内功研修",
+                                  "field": "neigongyanxiu",
+                                  "headerClassName": "oj-typography-subheading-sm"
+                              }, {
+                                  "headerText": "价格",
+                                  "field": "price",
+                                  "sortable":"enabled",
+                                  "headerClassName": "oj-typography-subheading-sm",
+                                  "className": "oj-text-color-danger"
+                              }, {
+                                  "headerText": "状态",
+                                  "field": "status",
+                                  "headerClassName": "oj-typography-subheading-sm"
+                              }, {
+                                  "headerText": "服务器",
+                                  "field": "server",
+                                  "headerClassName": "oj-typography-subheading-sm"
+                              }, {
+                                  "headerText": "查看详情",
+                                  "headerClassName": "oj-typography-subheading-sm",
+                                  "headerStyle": "text-align: center;",
+                                  "style":"text-align: center; padding-top: 0px; padding-bottom: 0px;",
+                                  "template": "actionTemplate"
+                              }]'>
+                <template slot="actionTemplate" data-oj-as="cell">
+                    <oj-button id="info" chroming="borderless" display='icons' on-oj-action="[[actionListener]]">
+                        <span slot='startIcon' class="oj-ux-ico-information"></span>
+                    </oj-button>
+                </template>
+                <template slot="noData">
+                    <div class="oj-flex oj-sm-align-items-center" style="height:100%">
+                        <div class="oj-flex oj-sm-align-items-center oj-sm-flex-direction-column" style="width:100%">
+                            <img class="oj-sm-margin-5x-top" src="css/images/noData.png"/>
+                            <span class="oj-sm-padding-2x-top oj-sm-padding-5x-bottom oj-typography-heading-xl">抱歉，没有相关物品!</span>
+                        </div>
+                    </div>
+                </template>
+                <oj-paging-control id="paging" data="[[pagingDataProvider]]" page-size="10" slot="bottom">
+                </oj-paging-control>
+            </oj-table>
+        </div>
+    </oj-switcher>
+</div>
+<oj-dialog style="display:none; width: 84vw; height: 90vh;" id="detailsDialog" cancel-behavior="icon">
+    <div slot="header" class="dialogHeader">
+        <span>编号：<oj-bind-text value="[[roleID]]"></oj-bind-text></span>
+        <span><oj-bind-text value="[[roleName]]"></oj-bind-text></span>
+        <span><oj-bind-text value="[[rolePrice]]"></oj-bind-text>.00元</span>
+        <span><oj-bind-text value="[[roleServer]]"></oj-bind-text></span>
+    </div>
+    <div slot="body">
+        <span class="oj-typography-heading-sm">宝物</span>
+        <div class="oj-panel oj-sm-margin-4x oj-flex">
+            <oj-bind-for-each data="{{treasureData}}">
+                <template>
+                    <div class="oj-panel oj-sm-margin-2x">
+                        <oj-bind-dom config="{{$current.data}}"></oj-bind-dom>
+                    </div>
+                </template>
+            </oj-bind-for-each>
+        </div>
+        <span class="oj-typography-heading-sm">三技能装备</span>
+        <div class="oj-panel oj-sm-margin-4x oj-flex">
+            <oj-bind-for-each data="{{threeSkillsData}}">
+                <template>
+                    <div class="oj-panel oj-sm-margin-2x">
+                        <oj-bind-dom config="{{$current.data}}"></oj-bind-dom>
+                    </div>
+                </template>
+            </oj-bind-for-each>
+        </div>
+        <span class="oj-typography-heading-sm">风物志</span>
+        <div class="oj-panel oj-sm-margin-4x">
+            <oj-list-view id="listview" data="[[skinDataProvider]]" display="card">
+                <template  slot="itemTemplate" data-oj-as="item">
+                    <li>
+                        <oj-action-card>
+                            <div style="background-color: #675946; margin: 5px 5px; padding: 2px 5px; border: 1px solid #000; border-radius: 3px;">
+                                <div>
+                                    <oj-bind-text value="[[item.data.name]]"></oj-bind-text>
+                                    <br>类型:<font color='#FFFFFF'><oj-bind-text value="[[item.data.type]]"></oj-bind-text></font>
+                                    <br>品质:<oj-bind-text value="[[item.data.quality]]"></oj-bind-text>
+                                </div>
+                                <img :src="[[item.data.photo]]" alt="风物志" width="90px" height="90px"/>
+                            </div>
+                        </oj-action-card>
+                    </li>
+                </template>
+            </oj-list-view>
+        </div>
+    </div>
+    <div slot="footer"></div>
+</oj-dialog>
+
+<!--遮罩层-->
+<div class="mark loading">
+    <div></div>
+</div>

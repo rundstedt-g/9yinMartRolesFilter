@@ -1,0 +1,261 @@
+header,footer{
+    max-width: 76%;
+    margin: 0 auto;
+    background-color: white;
+    opacity: 0.9;
+}
+
+.logo{
+    margin-top:2%;
+    margin-left:2%;
+    margin-bottom:2%;
+    width:42%;
+    height:7%;
+}
+
+header span{
+    float: right;
+    margin-right: 2%;
+}
+
+.web_bg{
+    background-image: url(images/background.jpg);
+
+    /* 这三句是让整个div固定在屏幕的最上方和最左方 */
+    position:fixed; /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
+    top: 0;
+    left: 0;
+
+    margin:0;
+    width:100%;
+    height:100%;
+    min-width: 1000px; /*实现让屏幕宽度在1000px以内时，div的大小保持不变，也就是说在这种情况下，缩放屏幕宽度时，图片不要缩放（只有在1000px以内才有效）*/
+    z-index:-1; /*让整个div在HTML页面中各个层级的下方*/
+    zoom: 1; /*设置或检索对象的缩放比例。此处用浮点数来定义缩放比例为100%。*/
+    background-color: #fff;
+    background-repeat: no-repeat; /*定义图像的平铺模式, no-repeat 背景图像将仅显示一次。*/
+
+    /*让图片随屏幕大小同步缩放*/
+    background-size: cover; /*规定背景图像的尺寸：cover 把背景图像扩展至足够大，以使背景图像完全覆盖背景区域。 背景图像的某些部分也许无法显示在背景定位区域中。*/
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+
+    background-position: center 0; /*设置背景图像的起始位置。*/
+}
+
+.web_bg_maintenance{
+    background-image: url(images/background2.png);
+
+    /* 这三句是让整个div固定在屏幕的最上方和最左方 */
+    position:fixed; /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
+    top: 0;
+    left: 0;
+
+    margin:0;
+    width:100%;
+    height:100%;
+    min-width: 1000px; /*实现让屏幕宽度在1000px以内时，div的大小保持不变，也就是说在这种情况下，缩放屏幕宽度时，图片不要缩放（只有在1000px以内才有效）*/
+    z-index:-1; /*让整个div在HTML页面中各个层级的下方*/
+    zoom: 1; /*设置或检索对象的缩放比例。此处用浮点数来定义缩放比例为100%。*/
+    background-color: #fff;
+    background-repeat: no-repeat; /*定义图像的平铺模式, no-repeat 背景图像将仅显示一次。*/
+
+    /*让图片随屏幕大小同步缩放*/
+    background-size: cover; /*规定背景图像的尺寸：cover 把背景图像扩展至足够大，以使背景图像完全覆盖背景区域。 背景图像的某些部分也许无法显示在背景定位区域中。*/
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+
+    background-position: center 0; /*设置背景图像的起始位置。*/
+}
+
+.wrapper{
+    max-width: 76%;
+    margin: 5px auto;
+    background-color: white;
+    opacity: 0.8;
+}
+
+#navlist {
+    width: 1px;
+    min-width: 100%;
+}
+.navigation-bar{
+    border-bottom: 1px solid rgb(87, 115, 70);
+}
+.hidden {
+    display: none;
+}
+.navigation-icon{
+    vertical-align:middle;
+}
+.filter{
+    max-width: 96%;
+    margin: 2% auto auto auto;
+    padding-bottom: 1%;
+}
+.filter .filter_top{
+    margin-top: 2%;
+}
+.filter .other_filter_top{
+    border-bottom: 1px solid black;
+    padding-bottom: 2%;
+}
+
+.filter_top .filter_prop{
+    margin-top: 4px;
+}
+
+.filter .filter_content{
+    margin-top: 1%;
+    border: 1px solid black;
+}
+.filter .filter_content .filter_subContent{
+    margin-left: 1%;
+}
+
+.filter .special_filter_content{
+    margin-top: 1%;
+}
+
+.filter .filter_advanced{
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.filter .filter_advanced #menubutton-container{
+    width: 25%;
+}
+.filter .filter_advanced #only750{
+    width: 25%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.filter .filter_advanced #only750 .only750_txt{
+    margin-right: 2%;
+}
+
+.filter .filter_advanced .placeholder{
+    width: 25%;
+}
+
+.filter .other_filter_advanced{
+    border-top: 1px solid black;
+    padding-top: 2%;
+}
+
+#buttons-container{
+    width:25%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.wrapper .wrapper_content{
+    max-width: 96%;
+    margin: 2% auto auto auto;
+    padding-bottom: 2%;
+}
+
+.wrapper_content #initial{
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+}
+.wrapper_content #pagingControl{
+    border: 1px solid black;
+}
+
+
+footer .link_list{
+    padding-top:10px;
+    max-width: 30%;
+    margin: 0  auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    align-content:space-between;
+}
+footer .link_list .links{
+    margin-bottom: 10px;
+    text-align: center;
+    color:black;
+    width: 30%;
+}
+footer .link_list .links:hover{
+    color:red;
+}
+
+.dialogHeader{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dialogHeader span{
+    width: 25%;
+}
+
+.mark {
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    bottom: 0;
+    background-image: url("./images/white_opacity_3.png");
+}
+.loading div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("./images/loading.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.bottom-right-corner {
+    position: fixed;
+    right: 2px;
+    bottom: 10%;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #eee;
+    background-color: white;
+    font-size: 24px;
+    z-index: 1040;
+    -webkit-backface-visibility: hidden;
+}
+
+.bottom-right-corner a {
+    background-image: url("./images/qrcode.png");
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+#qrcodeDialog{
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 999;
+    display:none;
+}
+
+.myQrcode{
+    width: 250px;
+    height: 332px;
+    position: fixed;
+    top: 35%;
+    left: 44%;
+    background-image: url("./images/myqrcode.jpg");
+}

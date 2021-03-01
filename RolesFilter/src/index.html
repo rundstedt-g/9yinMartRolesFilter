@@ -1,45 +1,72 @@
 <!DOCTYPE html>
-<!--
- Copyright (c) 2014, 2020, Oracle and/or its affiliates.
- Licensed under The Universal Permissive License (UPL), Version 1.0
- as shown at https://oss.oracle.com/licenses/upl/
- -->
-
-<!-- ************************ IMPORTANT INFORMATION ************************************
-        This blank template contains a basic web application setup with a header and sticky footer.
-        It contains the Oracle JET framework and a default requireJS
-        configuration file to show how JET can be setup in a common application.
-        This project template can be used in conjunction with demo code from the JET
-        website to test JET component behavior and interactions.
-
-  Any CSS styling with the prefix "demo-" is for demonstration only and is not
-  provided as part of the JET framework.
-
-  Best practice patterns are provided as part of the JET website under the Samples section.
-
-  Aria Landmark role attributes are added to the different sections of the application
-  for accessibility compliance. If you change the type of content for a specific
-  section from what is defined, you should also change the role value for that
-  section to represent the appropriate content type.
-  ***************************** IMPORTANT INFORMATION ************************************ -->
 <html lang="en-us">
   <head>
-    <title>Oracle JET Starter Template - Web Blank</title>
+    <title>角色筛选搜索</title>
     <meta http-equiv="x-ua-compatible" content="IE=edge"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="viewport-fit=cover, initial-scale=1.0"/>
     <link rel="icon" type="image/x-icon" href="css/images/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" href="css/images/touchicon.png">
     <meta name="apple-mobile-web-app-title" content="Oracle JET">
-
-    <!-- injector:theme -->
-    <link rel="stylesheet" href="css/libs/oj/v9.2.0/redwood/oj-redwood-min.css" id="css" />
-    <!-- endinjector -->
-    
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/redwood/9.2.0/web/redwood.css" id="css" />
+    <link rel="stylesheet" href="css/demo-alta-site-min.css" type="text/css"/>
+    <link rel="stylesheet" id="uxiconFont" href="https://static.oracle.com/cdn/fnd/gallery/2010.0.0/images/iconfont/ojuxIconFont.min.css">
   </head>
-  <body>
 
-    <script type="text/javascript" src="js/libs/require/require.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+  <body>
+    <div id="particles-js" class="web_bg"></div>
+    <header>
+      <img class="logo" src="css/images/logo.png">
+      <span id="updateTime"></span>
+    </header>
+    <div id="wrapper" class="wrapper">
+      <div id="navlist">
+        <oj-navigation-list selection="{{selection.path}}" edge="top"> <!--jet的导航列表组件-->
+          <ul class="navigation-bar"> <!--导航列表-->
+            <li id="treasure">
+              <a href="#">
+                <img class="navigation-icon" src="css/images/treasure.png"/>
+                根据宝物搜索
+              </a>
+            </li>
+            <li id="threeSkills">
+              <a href="#">
+                <img class="navigation-icon" src="css/images/threeSkills.png"/>
+                根据三技能搜索
+              </a>
+            </li>
+            <li id="skin">
+              <a href="#">
+                <img class="navigation-icon" src="css/images/skin.png"/>
+                根据风物志搜索
+              </a>
+            </li>
+          </ul>
+        </oj-navigation-list>
+      </div>
+
+      <oj-module config="[[moduleAdapter.koObservableConfig]]"></oj-module>
+    </div>
+
+    <div class="bottom-right-corner">
+      <a class="qrcode" href="javascript:;" title="联系我们" onmouseover="myQrcodeShow()" onmouseout="myQrcodeHide()"></a>
+    </div>
+
+    <div id="qrcodeDialog">
+      <div class="myQrcode"></div>
+    </div>
+
+    <footer>
+      <div class="link_list">
+        <a class="links" href="http://jishi.woniu.com" target="_blank">九阴集市</a>
+        <a class="links" href="https://9yin.woniu.com/main.html" target="_blank">九阴官网</a>
+        <a class="links" href="https://9yin.woniu.com/wiki/" target="_blank">九阴维基</a>
+        <a class="links" href="http://9yin.azurewebsites.net/" target="_blank">永乐大典</a>
+        <a class="links" href="http://treasure.rundstedt.cn" target="_blank">宝物筛选</a>
+        <a class="links" href="http://jingmai.rundstedt.cn" target="_blank">经脉模拟</a>
+        <a class="links" href="http://jiuyin.realmmy.com/" target="_blank">角色历史</a>
+      </div>
+    </footer>
+    <script type="text/javascript"  data-main="js/main" src="js/libs/require/require.js"></script>
   </body>
 </html>
