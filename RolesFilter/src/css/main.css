@@ -44,7 +44,7 @@ header span{
 }
 
 .web_bg_maintenance{
-    background-image: url(images/background2.png);
+    background-image: url(images/background2.jpg);
 
     /* 这三句是让整个div固定在屏幕的最上方和最左方 */
     position:fixed; /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
