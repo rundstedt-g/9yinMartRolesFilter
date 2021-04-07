@@ -13,7 +13,9 @@
     {
       baseUrl: 'js',
 
-      paths:{
+      paths:
+      // injector:mainReleasePaths
+      {
           "knockout":"libs/knockout/knockout-3.5.1.debug",
           "jquery":"libs/jquery/jquery-3.5.1",
           "jqueryui-amd":"libs/jquery/jqueryui-amd-1.12.1",
@@ -34,7 +36,9 @@
           "css":"libs/require-css/css",
           "css-builder":"libs/require-css/css-builder",
           "normalize":"libs/require-css/normalize",
-      },
+      }
+      // endinjector
+        ,
       shim: {
           'particles-conf':{
 
