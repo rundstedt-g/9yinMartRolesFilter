@@ -191,12 +191,6 @@ footer .link_list .links:hover{
 
 .dialogHeader{
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.dialogHeader span{
-    width: 25%;
 }
 
 .mark {
