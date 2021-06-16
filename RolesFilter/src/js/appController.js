@@ -3,7 +3,7 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojcorerouter', 'ojs/ojurlp
     function (ko, $, Bootstrap , CoreRouter, UrlParamAdapter, ModuleRouterAdapter, KnockoutRouterAdapter) {
         function ViewModel() {
             $.ajax({
-                url:"http://roles.rundstedt.cn:8080/isMaintenance",
+                url:"http://localhost:8080/isMaintenance",
                 dataType: "json",
                 success: function(data){
                     if(data.isMaintenance == true){

@@ -1,6 +1,6 @@
 define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataproviderview', 'ojs/ojhtmlutils', 'ojs/ojknockout',
         'ojs/ojnavigationlist', 'ojs/ojswitcher', 'ojs/ojlistview', 'ojs/ojavatar', 'ojs/ojselectcombobox','ojs/ojbinddom','ojs/ojactioncard',
-        'ojs/ojpagingcontrol', 'ojs/ojtable', 'ojs/ojdialog', 'ojs/ojbutton'],
+        'ojs/ojpagingcontrol', 'ojs/ojtable', 'ojs/ojdialog', 'ojs/ojbutton',"ojs/ojselectsingle"],
     function(ko, $, ArrayDataProvider, PagingDataProviderView,HtmlUtils) {
         function viewModel () {
             this.clothing = [{name:'萤光栖月', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/901.png'},
@@ -487,16 +487,24 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
             this.search = function () {
                 var skillArray =  this.selectedClothDisplay();
                 var len = skillArray.length;
-                var param = len>0 ? '?':'';
+                var param = len>0 || this.selectedServer() ? '?':'';
                 for(var i=0; i<len; i++){
                     param += 'skin' + (i+1) + '=' + skillArray[i];
                     if(i<len-1){
                         param += '&';
                     }
                 }
+                var serverParam = "";
+                if(this.selectedServer()){
+                    if(len>0){
+                        serverParam =  serverParam + "&";
+                    }
+                    serverParam = serverParam + "server=" + this.selectedServer();
+                }
+
                 openLoading();
                 $.ajax({
-                    url:"http://roles.rundstedt.cn:8080/bySkin" + param,
+                    url:"http://localhost:8080/bySkin" + param + serverParam,
                     dataType: "json",
                     success: function(data){
                         loadData(data);
@@ -535,7 +543,7 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
 
                 openLoading();
                 $.ajax({
-                    url:"http://roles.rundstedt.cn:8080/getRole?id=" + context.row.roleID,
+                    url:"http://localhost:8080/getRole?id=" + context.row.roleID,
                     dataType: "json",
                     success: function(data){
                         loadRole(data);
@@ -578,6 +586,7 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
                 self.threeSkillsData(threeSkillsDom);
 
                 //风物志
+                self.skinData.removeAll();
                 self.skinData(data['skin']);
             };
 
@@ -589,6 +598,26 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
             function closeLoading(){
                 $(".loading").hide();
             }
+
+            this.server = ko.observableArray();
+            this.serverDP = new ArrayDataProvider(this.server,{keyAttributes: "value"});
+            this.selectedServer = ko.observable();
+            this.selectedServerChanged =  ()=>{
+                if(this.switcherSelectedItem() == "pagingControl"){
+                    this.search();
+                }
+            }
+            $.ajax({
+                url:"http://localhost:8080/getServers",
+                dataType: "json",
+                success: function(servers){
+                    loadServers(servers);
+                }
+            });
+            var loadServers = function (servers){
+                this.server( servers.map(item=> ({value:item.server, label:item.server})) );
+                this.server.push({value:"", label:"全区全服"})
+            }.bind(this);
         }
         return viewModel;
     }

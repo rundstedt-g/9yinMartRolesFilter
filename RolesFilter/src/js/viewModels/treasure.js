@@ -1,7 +1,7 @@
 define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs/ojarraytreedataprovider', 'ojs/ojpagingdataproviderview',
         'ojs/ojhtmlutils', 'ojs/ojcontext', 'ojs/ojaccordion', 'ojs/ojknockout', 'ojs/ojcheckboxset', 'ojs/ojbutton',  'ojs/ojswitch', 'ojs/ojmenu', 'ojs/ojoption',
         'ojs/ojdialog', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojswitcher', 'ojs/ojmasonrylayout', 'ojs/ojlistview', 'ojs/ojavatar', 'ojs/ojpopup',
-        'ojs/ojlistitemlayout', 'ojs/ojbinddom', 'ojs/ojactioncard'],
+        'ojs/ojlistitemlayout', 'ojs/ojbinddom', 'ojs/ojactioncard', "ojs/ojselectsingle"],
     function(ko, $, Bootstrap, ArrayDataProvider, ArrayTreeDataProvider, PagingDataProviderView, HtmlUtils, Context) {
         function viewModel () {
             //复选框
@@ -248,7 +248,7 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
             this.search = function () {
                 var bwa = this.selectVal1().concat(this.selectVal2(), this.selectVal3(), this.selectVal4());
                 var bwaStr = "";
-                if(bwa.length > 0 || this.selectedMenuItem() != '' || this.isChecked() == true){ //存在参数
+                if(bwa.length > 0 || this.selectedMenuItem() != '' || this.isChecked() == true || this.selectedServer()){ //存在参数
                     bwaStr = bwaStr + "?";
                 }
                 for(var i=1; i<=bwa.length; i++){
@@ -266,15 +266,23 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
                 }
                 var is750Param = "";
                 if(this.isChecked() == true){
-                    if(bwa.length>0 || this.isChecked() == true){
+                    if(bwa.length>0 || skillParam){
                         is750Param = is750Param + "&";
                     }
                     is750Param = is750Param + "is750=true";
                 }
 
+                var serverParam = "";
+                if(this.selectedServer()){
+                    if(bwa.length>0 || skillParam || is750Param){
+                        serverParam =  serverParam + "&";
+                    }
+                    serverParam = serverParam + "server=" + this.selectedServer();
+                }
+
                 openLoading();
                 $.ajax({
-                    url:"http://roles.rundstedt.cn:8080/byTreasure" + bwaStr + skillParam + is750Param,
+                    url:"http://localhost:8080/byTreasure" + bwaStr + skillParam + is750Param + serverParam,
                     dataType: "json",
                     success: function(data){
                         loadData(data);
@@ -313,7 +321,7 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
 
                 openLoading();
                 $.ajax({
-                    url:"http://roles.rundstedt.cn:8080/getRole?id=" + context.row.roleID,
+                    url:"http://localhost:8080/getRole?id=" + context.row.roleID,
                     dataType: "json",
                     success: function(data){
                         loadRole(data);
@@ -356,6 +364,7 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
                 self.threeSkillsData(threeSkillsDom);
 
                 //风物志
+                self.skinData.removeAll();
                 self.skinData(data['skin']);
             };
 
@@ -367,6 +376,26 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
             function closeLoading(){
                 $(".loading").hide();
             }
+
+            this.server = ko.observableArray();
+            this.serverDP = new ArrayDataProvider(this.server,{keyAttributes: "value"});
+            this.selectedServer = ko.observable();
+            this.selectedServerChanged =  ()=>{
+                if(this.switcherSelectedItem() == "pagingControl"){
+                    this.search();
+                }
+            }
+            $.ajax({
+                url:"http://localhost:8080/getServers",
+                dataType: "json",
+                success: function(servers){
+                    loadServers(servers);
+                }
+            });
+            var loadServers = function (servers){
+                this.server( servers.map(item=> ({value:item.server, label:item.server})) );
+                this.server.push({value:"", label:"全区全服"})
+            }.bind(this);
         }
         return viewModel;
     }

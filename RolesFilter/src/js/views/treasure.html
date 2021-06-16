@@ -151,6 +151,7 @@
                                   "headerClassName": "oj-typography-subheading-sm"
                               }, {
                                   "headerText": "服务器",
+                                  "headerTemplate": "headerTemplate",
                                   "field": "server",
                                   "headerClassName": "oj-typography-subheading-sm"
                               }, {
@@ -160,6 +161,19 @@
                                   "style":"text-align: center; padding-top: 0px; padding-bottom: 0px;",
                                   "template": "actionTemplate"
                               }]'>
+                <template slot="headerTemplate">
+                    <div class="oj-flex oj-sm-justify-content-center">
+                        <div class="oj-form-control-inherit">
+                            <oj-select-single class="oj-form-control-width-sm"
+                                              data="[[serverDP]]"
+                                              value="{{selectedServer}}"
+                                              on-value-changed="[[selectedServerChanged]]"
+                                              label-edge="none"
+                                              placeholder="区服">
+                            </oj-select-single>
+                        </div>
+                    </div>
+                </template>
                 <template slot="actionTemplate" data-oj-as="cell">
                     <oj-button id="info" chroming="borderless" display='icons' on-oj-action="[[actionListener]]">
                         <span slot='startIcon' class="oj-ux-ico-information"></span>

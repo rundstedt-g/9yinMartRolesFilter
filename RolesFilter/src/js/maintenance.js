@@ -31,7 +31,7 @@ function myQrcodeHide(){
 require(['jquery'],
     function ($) {
         $.ajax({
-            url:"http://roles.rundstedt.cn:8080/isMaintenance",
+            url:"http://localhost:8080/isMaintenance",
             dataType: "json",
             success: function(data){
                 if(data.isMaintenance == false){
