@@ -6,7 +6,9 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
             // 服务器地址
             var address = window.location.protocol + "//" + window.location.hostname + ":8080";
 
-            this.clothing = [{name:'萤光栖月', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/901.png'},
+            this.clothing = [{name:'康宁丰乐', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/912.png'},
+                {name:'香墨揉蓝裳', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/898.png'},
+                {name:'萤光栖月', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/901.png'},
                 {name:'载月云间', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/900.png'},
                 {name:'踱迹迷仙', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/899.png'},
                 {name:'春融漫红', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/891.png'},
