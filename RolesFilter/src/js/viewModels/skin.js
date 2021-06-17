@@ -235,7 +235,8 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
                 {name:'月牙银钩套', type:'双刀', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/30.png'},
                 {name:'无敌钩套', type:'双刀', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/27.png'}
             ];
-            this.shortStick = [{name:'昇龙烟斗(短棍)', type:'短棍', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/869.png'},
+            this.shortStick = [{name:'尘清如意', type:'短棍', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/933.png'},
+                {name:'昇龙烟斗(短棍)', type:'短棍', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/869.png'},
                 {name:'亮银虬龙棒', type:'短棍', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/449.png'},
                 {name:'如意手（棍）', type:'短棍', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/405.png'},
                 {name:'捶金虎头棒套', type:'短棍', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/367.png'},
@@ -277,7 +278,8 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
                 {name:'黄金棍套', type:'长棍', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/16.png'},
                 {name:'霸王枪套', type:'长棍', quality:'绝世', photo:'http://jishi.woniu.com/res/gui/special/card/4.png'}
             ];
-            this.dagger = [{name:'千忆扇', type:'匕首', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/879.png'},
+            this.dagger = [{name:'却邪卫真令', type:'匕首', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/934.png'},
+                {name:'千忆扇', type:'匕首', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/879.png'},
                 {name:'侠骨扇', type:'匕首', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/876.png'},
                 {name:'昇龙烟斗（匕首）', type:'匕首', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/868.png'},
                 {name:'金环银锋刺', type:'匕首', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/443.png'},
