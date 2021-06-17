@@ -2,8 +2,11 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojcorerouter', 'ojs/ojurlp
         'ojs/ojknockoutrouteradapter', 'ojs/ojknockout', 'ojs/ojnavigationlist', 'ojs/ojmodule-element'],
     function (ko, $, Bootstrap , CoreRouter, UrlParamAdapter, ModuleRouterAdapter, KnockoutRouterAdapter) {
         function ViewModel() {
+            // 服务器地址
+            var address = window.location.protocol + "//" + window.location.hostname + ":8080";
+
             $.ajax({
-                url:"http://localhost:8080/isMaintenance",
+                url: address + "/isMaintenance",
                 dataType: "json",
                 success: function(data){
                     if(data.isMaintenance == true){
@@ -20,7 +23,8 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojcorerouter', 'ojs/ojurlp
                 { path: "", redirect: "treasure" }, // 默认路由重定向到 treasure
                 { path: "treasure"},
                 { path: "threeSkills"},
-                { path: "skin"}
+                { path: "skin"},
+                { path: "name"}
             ];
 
             // 创建路由器

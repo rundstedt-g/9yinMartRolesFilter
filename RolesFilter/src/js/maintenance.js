@@ -30,8 +30,11 @@ function myQrcodeHide(){
 //初始化
 require(['jquery'],
     function ($) {
+        // 服务器地址
+        var address = window.location.protocol + "//" + window.location.hostname + ":8080";
+
         $.ajax({
-            url:"http://localhost:8080/isMaintenance",
+            url: address + "/isMaintenance",
             dataType: "json",
             success: function(data){
                 if(data.isMaintenance == false){

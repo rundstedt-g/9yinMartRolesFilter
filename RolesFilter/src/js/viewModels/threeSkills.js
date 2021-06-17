@@ -3,6 +3,9 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
         'ojs/ojswitcher',"ojs/ojselectsingle"],
     function(ko, $, ArrayDataProvider, PagingDataProviderView, HtmlUtils) {
         function viewModel () {
+            // 服务器地址
+            var address = window.location.protocol + "//" + window.location.hostname + ":8080";
+            
             // 下拉框
             this.menuItems = [
                 {value: '徒手套路', submenu:[
@@ -181,7 +184,7 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
 
                 openLoading();
                 $.ajax({
-                    url:"http://localhost:8080/byThreeSkills" + param + serverParam,
+                    url: address + "/byThreeSkills" + param + serverParam,
                     dataType: "json",
                     success: function(data){
                         loadData(data);
@@ -220,7 +223,7 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
 
                 openLoading();
                 $.ajax({
-                    url:"http://localhost:8080/getRole?id=" + context.row.roleID,
+                    url: address + "/getRole?id=" + context.row.roleID,
                     dataType: "json",
                     success: function(data){
                         loadRole(data);
@@ -285,7 +288,7 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
                 }
             }
             $.ajax({
-                url:"http://localhost:8080/getServers",
+                url: address + "/getServers",
                 dataType: "json",
                 success: function(servers){
                     loadServers(servers);

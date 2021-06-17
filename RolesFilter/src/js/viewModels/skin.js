@@ -3,6 +3,9 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
         'ojs/ojpagingcontrol', 'ojs/ojtable', 'ojs/ojdialog', 'ojs/ojbutton',"ojs/ojselectsingle"],
     function(ko, $, ArrayDataProvider, PagingDataProviderView,HtmlUtils) {
         function viewModel () {
+            // 服务器地址
+            var address = window.location.protocol + "//" + window.location.hostname + ":8080";
+
             this.clothing = [{name:'萤光栖月', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/901.png'},
                 {name:'载月云间', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/900.png'},
                 {name:'踱迹迷仙', type:'套装', quality:'珍藏', photo:'http://jishi.woniu.com/res/gui/special/card/899.png'},
@@ -504,7 +507,7 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
 
                 openLoading();
                 $.ajax({
-                    url:"http://localhost:8080/bySkin" + param + serverParam,
+                    url: address + "/bySkin" + param + serverParam,
                     dataType: "json",
                     success: function(data){
                         loadData(data);
@@ -543,7 +546,7 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
 
                 openLoading();
                 $.ajax({
-                    url:"http://localhost:8080/getRole?id=" + context.row.roleID,
+                    url: address + "/getRole?id=" + context.row.roleID,
                     dataType: "json",
                     success: function(data){
                         loadRole(data);
@@ -608,7 +611,7 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
                 }
             }
             $.ajax({
-                url:"http://localhost:8080/getServers",
+                url: address + "/getServers",
                 dataType: "json",
                 success: function(servers){
                     loadServers(servers);
