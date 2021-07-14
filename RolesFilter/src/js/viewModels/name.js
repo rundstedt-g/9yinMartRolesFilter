@@ -1,7 +1,7 @@
-define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataproviderview', 'ojs/ojhtmlutils', "ojs/ojasyncvalidator-regexp", 'ojs/ojknockout',
-        'ojs/ojbutton', 'ojs/ojmenu', 'ojs/ojoption', 'ojs/ojlistview', 'ojs/ojdialog', 'ojs/ojlistitemlayout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojbinddom',
+define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataproviderview', 'ojs/ojhtmlutils', "ojs/ojasyncvalidator-regexp", 'component/dialog',
+        'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojmenu', 'ojs/ojoption', 'ojs/ojlistview', 'ojs/ojdialog', 'ojs/ojlistitemlayout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojbinddom',
         'ojs/ojactioncard', 'ojs/ojswitcher',"ojs/ojselectsingle","ojs/ojinputtext"],
-    function(ko, $, ArrayDataProvider, PagingDataProviderView, HtmlUtils, AsyncRegExpValidator) {
+    function(ko, $, ArrayDataProvider, PagingDataProviderView, HtmlUtils, AsyncRegExpValidator, dialogUtil) {
         function viewModel () {
             // 服务器地址
             var address = window.location.protocol + "//" + window.location.hostname + ":8080";
@@ -19,22 +19,21 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
 
             // 搜索按钮
             this.search = function () {
-                var param = this.name() || this.selectedServer() ? '?':'';
-                if(this.name()){
-                    param = param + "name=" + this.name();
+                if(!this.name()){
+                    alert("请输入一个名字!");
+                    return;
+                }
+                if(!this.selectedServer()){
+                    alert("请选择一个区服!");
+                    return;
                 }
 
-                var serverParam = "";
-                if(this.selectedServer()){
-                    if(this.name()){
-                        serverParam =  serverParam + "&";
-                    }
-                    serverParam = serverParam + "server=" + this.selectedServer();
-                }
+                name = "name=" + this.name();
+                serverId = "serverId=" + this.selectedServer();
 
                 openLoading();
                 $.ajax({
-                    url: address + "/byName" + param + serverParam,
+                    url: address + "/requestByName?" + name + "&" + serverId,
                     dataType: "json",
                     success: function(data){
                         loadData(data);
@@ -63,62 +62,8 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
 
             // 监听表格行的按钮
             this.actionListener = function (event, context) {
-                // event.detail.originalEvent.stopPropagation();
-                document.querySelector('#detailsDialog').open();
-
-                this.roleID(context.row.roleID);
-                this.roleName(context.row.name);
-                this.rolePrice(context.row.price);
-                this.roleServer(context.row.server);
-
-                openLoading();
-                $.ajax({
-                    url: address + "/getRole?id=" + context.row.roleID,
-                    dataType: "json",
-                    success: function(data){
-                        loadRole(data);
-                        closeLoading();
-                    }
-                });
-
+                dialogUtil(context.row.id, context.row.name, context.row.price, context.row.server.name, context.row.server.id, context.row.roleUid);
             }.bind(this);
-
-            this.roleID = ko.observable("000000");
-            this.roleName = ko.observable("NULL");
-            this.rolePrice = ko.observable("0");
-            this.roleServer = ko.observable("NULL");
-
-            var self = this;
-
-            // 宝物
-            self.treasureData = ko.observableArray([]);
-
-            // 三技能
-            self.threeSkillsData = ko.observableArray([]);
-
-            //风物志
-            self.skinData = ko.observableArray([]);
-            self.skinDataProvider = new ArrayDataProvider(self.skinData, { keyAttributes: 'sID' });
-
-            var loadRole = function (data){
-                //宝物集
-                var treasureDom = [];
-                for(var k=0; k< data['treasure'].length ; k++){
-                    treasureDom.push({ view: HtmlUtils.stringToNodeArray(data['treasure'][k]['dataInfo']), data: {}});
-                }
-                self.treasureData(treasureDom);
-
-                //三技能集
-                var threeSkillsDom = [];
-                for(var k=0; k< data['threeSkills'].length ; k++){
-                    threeSkillsDom.push({ view: HtmlUtils.stringToNodeArray(data['threeSkills'][k]['dataInfo']), data: {}});
-                }
-                self.threeSkillsData(threeSkillsDom);
-
-                //风物志
-                self.skinData.removeAll();
-                self.skinData(data['skin']);
-            };
 
             //打开加载遮罩层
             function openLoading(){
@@ -132,21 +77,16 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
             this.server = ko.observableArray();
             this.serverDP = new ArrayDataProvider(this.server,{keyAttributes: "value"});
             this.selectedServer = ko.observable();
-            this.selectedServerChanged =  ()=>{
-                if(this.switcherSelectedItem() == "pagingControl"){
-                    this.search();
-                }
-            }
+
             $.ajax({
-                url: address + "/getServers",
+                url: address + "/serverList",
                 dataType: "json",
                 success: function(servers){
                     loadServers(servers);
                 }
             });
             var loadServers = function (servers){
-                this.server( servers.map(item=> ({value:item.server, label:item.server})) );
-                this.server.push({value:"", label:"全区全服"})
+                this.server( servers.map(item=> ({value:item.id, label:item.name})) );
             }.bind(this);
 
         }
