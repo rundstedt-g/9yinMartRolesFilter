@@ -62,7 +62,7 @@ define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovide
 
             // 监听表格行的按钮
             this.actionListener = function (event, context) {
-                dialogUtil(context.row.id, context.row.name, context.row.price, context.row.server.name, context.row.server.id, context.row.roleUid);
+                dialogUtil(context.row.id, context.row.name, context.row.price, context.row.server.name, context.row.server.id);
             }.bind(this);
 
             //打开加载遮罩层

@@ -54,7 +54,7 @@ define(["knockout", 'jquery','ojs/ojarraydataprovider','ojs/ojhtmlutils',"ojs/oj
             // 坐骑
             mountsData = ko.observableArray();
             
-            constructor(id,name,price,serverName,serverId,roleUid) {
+            constructor(id,name,price,serverName,serverId) {
                 this.roleID(id);
                 this.roleName(name);
                 this.rolePrice(price);
@@ -62,7 +62,7 @@ define(["knockout", 'jquery','ojs/ojarraydataprovider','ojs/ojhtmlutils',"ojs/oj
 
                 this.switcherSelectedItem('load');
                 $.ajax({
-                    url: this.address + "/getRoleContent?serverId=" + serverId + "&roleUid=" + roleUid,
+                    url: this.address + "/getRoleContent?serverId=" + serverId + "&itemId=" + id,
                     dataType: "json",
                     success: function(data){
                         this.loadRole(data);
