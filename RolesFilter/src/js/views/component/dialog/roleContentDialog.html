@@ -1,26 +1,29 @@
-<oj-dialog style="width: 98vw; height: 90vh; position:fixed;" id="detailsDialog" cancel-behavior="icon">
-    <style>
-        #detailsDialog .oj-dialog-header {
-            border-bottom: 1px solid red;
-        }
-        #detailsDialog .oj-dialog-body {
-            padding-top: 30px;
-        }
-    </style>
-    <div slot="header" class="dialogHeader oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between">
-        <span class="oj-typography-heading-lg">编号：<oj-bind-text value="[[roleID]]"></oj-bind-text></span>
-        <span class="oj-typography-heading-lg"><oj-bind-text value="[[roleName]]"></oj-bind-text></span>
-        <span class="oj-typography-heading-lg"><oj-bind-text value="[[rolePrice]]"></oj-bind-text>.00元</span>
-        <span class="oj-typography-heading-lg oj-sm-margin-9x-end"><oj-bind-text value="[[roleServer]]"></oj-bind-text></span>
-    </div>
+<oj-dialog style="width: 98vw; height: 90vh; position:fixed;" id="detailsDialog" dialog-title="角色信息" resize-behavior="resizable" drag-affordance="title-bar" cancel-behavior="icon">
     <div slot="body">
+        <div style="width:100%; border-top: 1px solid red;" class="oj-flex oj-sm-flex-items-1 oj-sm-padding-2x-bottom oj-sm-padding-2x-top">
+            <span class="oj-typography-heading-md oj-flex-item">名称：<oj-bind-text value="[[roleName]]"></oj-bind-text></span>
+        </div>
+        <div style="width:100%;" class="oj-flex oj-sm-flex-items-1 oj-sm-padding-2x-bottom">
+            <span class="oj-typography-heading-md oj-flex-item">编号：<oj-bind-text value="[[roleID]]"></oj-bind-text></span>
+            <span class="oj-typography-heading-md oj-flex-item">状态：<oj-bind-text value="[[status]]"></oj-bind-text></span>
+            <span class="oj-typography-heading-md oj-flex-item">价格：<oj-bind-text value="[[rolePrice]]"></oj-bind-text>.00元</span>
+            <span class="oj-typography-heading-md oj-flex-item">区服：<oj-bind-text value="[[roleServer]]"></oj-bind-text></span>
+        </div>
+        <div style="width:100%; border-bottom: 1px solid red;" class="oj-flex oj-sm-flex-items-1 oj-sm-margin-10x-bottom oj-sm-padding-2x-bottom">
+            <span class="oj-typography-heading-md oj-flex-item">性别：<oj-bind-text value="[[gender]]"></oj-bind-text></span>
+            <span class="oj-typography-heading-md oj-flex-item">宗派：<oj-bind-text value="[[school]]"></oj-bind-text></span>
+            <span class="oj-typography-heading-md oj-flex-item">实力：<oj-bind-text value="[[grade]]"></oj-bind-text></span>
+            <span class="oj-typography-heading-md oj-flex-item">研修：<oj-bind-text value="[[neigongyanxiu]]"></oj-bind-text></span>
+        </div>
+
         <oj-switcher value="[[switcherSelectedItem]]">
             <div id="load"  slot="load" style="height: 600px;" class="oj-flex oj-sm-justify-content-center oj-sm-align-items-center">
                 <oj-progress-circle size='lg' value='-1'></oj-progress-circle>
             </div>
+
             <div id="content"  slot="content" >
                 <span class="oj-typography-heading-sm">宝物</span>
-                <div class="oj-panel oj-sm-margin-10x-bottom oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between">
+                <div class="oj-panel oj-sm-margin-10x-bottom oj-flex">
                     <oj-bind-for-each data="[[treasureData]]">
                         <template>
                             <div class="oj-panel">
@@ -201,5 +204,6 @@
                 </div>
             </div>
         </oj-switcher>
+    </div>
     <div slot="footer"></div>
 </oj-dialog>

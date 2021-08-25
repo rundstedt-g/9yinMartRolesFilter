@@ -1,7 +1,7 @@
-define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataproviderview', 'ojs/ojhtmlutils', 'ojs/ojknockout', 'ojs/ojbutton', 'ojs/ojmenu',
-        'ojs/ojoption', 'ojs/ojlistview', 'ojs/ojdialog', 'ojs/ojlistitemlayout', 'ojs/ojtable', 'ojs/ojpagingcontrol', 'ojs/ojbinddom', 'ojs/ojactioncard',
-        'ojs/ojswitcher',"ojs/ojselectsingle"],
-    function(ko, $, ArrayDataProvider, PagingDataProviderView, HtmlUtils) {
+define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataproviderview', 'ojs/ojhtmlutils', 'component/dialog','ojs/ojknockout',
+        'ojs/ojbutton', 'ojs/ojmenu', 'ojs/ojoption', 'ojs/ojlistview', 'ojs/ojdialog', 'ojs/ojlistitemlayout', 'ojs/ojtable', 'ojs/ojpagingcontrol',
+        'ojs/ojbinddom', 'ojs/ojactioncard', 'ojs/ojswitcher',"ojs/ojselectsingle"],
+    function(ko, $, ArrayDataProvider, PagingDataProviderView, HtmlUtils, dialogUtil) {
         function viewModel () {
             // 服务器地址
             var address = window.location.protocol + "//" + window.location.hostname + ":8080";
@@ -213,62 +213,19 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
 
             // 监听表格行的按钮
             this.actionListener = function (event, context) {
-                // event.detail.originalEvent.stopPropagation();
-                document.querySelector('#detailsDialog').open();
-
-                this.roleID(context.row.roleID);
-                this.roleName(context.row.name);
-                this.rolePrice(context.row.price);
-                this.roleServer(context.row.server);
-
-                openLoading();
-                $.ajax({
-                    url: address + "/getRole?id=" + context.row.roleID,
-                    dataType: "json",
-                    success: function(data){
-                        loadRole(data);
-                        closeLoading();
-                    }
-                });
-
+                dialogUtil(
+                    context.row.id,
+                    context.row.name,
+                    context.row.price,
+                    context.row.server.name,
+                    context.row.server.id,
+                    context.row.gender,
+                    context.row.school,
+                    context.row.grade,
+                    context.row.neigongyanxiu,
+                    context.row.status
+                );
             }.bind(this);
-
-            this.roleID = ko.observable("000000");
-            this.roleName = ko.observable("NULL");
-            this.rolePrice = ko.observable("0");
-            this.roleServer = ko.observable("NULL");
-
-            var self = this;
-
-            // 宝物
-            self.treasureData = ko.observableArray([]);
-
-            // 三技能
-            self.threeSkillsData = ko.observableArray([]);
-
-            //风物志
-            self.skinData = ko.observableArray([]);
-            self.skinDataProvider = new ArrayDataProvider(self.skinData, { keyAttributes: 'sID' });
-
-            var loadRole = function (data){
-                //宝物集
-                var treasureDom = [];
-                for(var k=0; k< data['treasure'].length ; k++){
-                    treasureDom.push({ view: HtmlUtils.stringToNodeArray(data['treasure'][k]['dataInfo']), data: {}});
-                }
-                self.treasureData(treasureDom);
-
-                //三技能集
-                var threeSkillsDom = [];
-                for(var k=0; k< data['threeSkills'].length ; k++){
-                    threeSkillsDom.push({ view: HtmlUtils.stringToNodeArray(data['threeSkills'][k]['dataInfo']), data: {}});
-                }
-                self.threeSkillsData(threeSkillsDom);
-
-                //风物志
-                self.skinData.removeAll();
-                self.skinData(data['skin']);
-            };
 
             //打开加载遮罩层
             function openLoading(){

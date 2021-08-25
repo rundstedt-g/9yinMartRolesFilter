@@ -2,9 +2,9 @@ define(['knockout',"ojs/ojmodule-element-utils","ojs/ojcontext","component/dialo
     function(ko,ModuleElementUtils,Context,RoleContentDialogViewModel){
         baseViewPath = "views/component/dialog/";
 
-        async function roleContentDialogOpen(id,name,price,serverName,serverId,roleUid){
+        async function roleContentDialogOpen(id,name,price,serverName,serverId,gender,school,grade,neigongyanxiu,status){
             const view = await ModuleElementUtils.createView({viewPath:  baseViewPath + 'roleContentDialog.html'});
-            const viewModel = new RoleContentDialogViewModel(id,name,price,serverName,serverId,roleUid);
+            const viewModel = new RoleContentDialogViewModel(id,name,price,serverName,serverId,gender,school,grade,neigongyanxiu,status);
             const dialog = view[0];
             document.body.appendChild(dialog);
             ko.applyBindings(viewModel, dialog);

@@ -12,6 +12,11 @@ define(["knockout", 'jquery','ojs/ojarraydataprovider','ojs/ojhtmlutils',"ojs/oj
             roleName = ko.observable("NULL");
             rolePrice = ko.observable("0");
             roleServer = ko.observable("NULL");
+            gender = ko.observable("NULL");
+            school = ko.observable("NULL");
+            grade = ko.observable("NULL");
+            neigongyanxiu = ko.observable("NULL");
+            status = ko.observable("NULL");
 
             // 宝物
             treasureData = ko.observableArray();
@@ -54,11 +59,16 @@ define(["knockout", 'jquery','ojs/ojarraydataprovider','ojs/ojhtmlutils',"ojs/oj
             // 坐骑
             mountsData = ko.observableArray();
             
-            constructor(id,name,price,serverName,serverId) {
+            constructor(id,name,price,serverName,serverId,gender,school,grade,neigongyanxiu,status) {
                 this.roleID(id);
                 this.roleName(name);
                 this.rolePrice(price);
                 this.roleServer(serverName);
+                this.gender(gender);
+                this.school(school);
+                this.grade(grade);
+                this.neigongyanxiu(neigongyanxiu);
+                this.status(status);
 
                 this.switcherSelectedItem('load');
                 $.ajax({
