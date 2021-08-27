@@ -41,7 +41,7 @@
         ,
       shim: {
           'particles-conf':{
-
+              deps: ['particles.min']
           },
           "particles.min" : {
 
