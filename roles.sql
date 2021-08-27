@@ -22,13 +22,15 @@ DROP TABLE IF EXISTS `role`;
 
 CREATE TABLE `role` (
   `roleID` int(11) NOT NULL,
+  `price` int(11) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
   `school` varchar(10) DEFAULT NULL,
+  `grade` varchar(20) DEFAULT NULL,
   `neigongyanxiu` varchar(20) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
   `status` varchar(10) DEFAULT NULL,
   `server` varchar(20) DEFAULT NULL,
+  `serverId` int(20) DEFAULT NULL,
   PRIMARY KEY (`roleID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -44,7 +46,7 @@ CREATE TABLE `skin` (
   `quality` varchar(10) DEFAULT NULL,
   `photo` text,
   PRIMARY KEY (`sID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2526 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `threeskills` */
 
@@ -57,7 +59,7 @@ CREATE TABLE `threeskills` (
   `wuxue` varchar(20) DEFAULT NULL,
   `skill` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`tsID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `treasure` */
 
@@ -81,7 +83,7 @@ CREATE TABLE `treasureprop` (
   `tID` int(11) DEFAULT NULL,
   `prop` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`pID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1005 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -94,8 +94,6 @@ define(["knockout", 'jquery','ojs/ojarraydataprovider','ojs/ojhtmlutils',"ojs/oj
             }
 
             loadRole (data){
-                console.log(data);
-
                 //宝物集
                 var treasureDom = [];
                 for(var k=0; k< data['baowu'].length ; k++){
