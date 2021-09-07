@@ -2,6 +2,7 @@
     <div class="filter_advanced">
         <div style="width:50%;">
             <oj-input-text  class="oj-form-control-width-sm" label-hint="名字" value="{{name}}" length.max="5" validators="[[nameValidator]]" clear-icon="conditional"></oj-input-text>
+            <oj-input-text  class="oj-form-control-width-sm" label-hint="编号" value="{{id}}" length.max="7" validators="[[idValidator]]" clear-icon="conditional"></oj-input-text>
             <oj-select-single class="oj-form-control-width-sm"
                               data="[[serverDP]]"
                               value="{{selectedServer}}"

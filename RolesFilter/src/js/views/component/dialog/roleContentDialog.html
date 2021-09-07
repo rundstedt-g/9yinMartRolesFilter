@@ -1,15 +1,29 @@
-<oj-dialog style="width: 98vw; height: 90vh; position:fixed;" id="detailsDialog" dialog-title="角色信息" resize-behavior="resizable" drag-affordance="title-bar" cancel-behavior="icon">
+<oj-dialog style="width: 98vw; height: 90vh; position:fixed;" id="detailsDialog" resize-behavior="resizable" drag-affordance="title-bar" cancel-behavior="icon">
+    <style>
+        #detailsDialog .oj-dialog-header {
+            border-bottom: 1px solid black;
+        }
+        #detailsDialog .oj-dialog-body {
+            padding-top: 10px;
+        }
+    </style>
+    <div slot="header" class="dialogHeader oj-flex oj-sm-flex-wrap-nowrap oj-sm-justify-content-space-between">
+        <span class="oj-typography-heading-lg"><oj-bind-text value="[[roleName]]"></oj-bind-text></span>
+        <span class="oj-typography-heading-lg"><oj-bind-text value="[[rolePrice]]"></oj-bind-text>.00元</span>
+        <span class="oj-typography-heading-md"><oj-bind-text value="[[status]]"></oj-bind-text></span>
+        <span class="oj-typography-heading-lg oj-sm-margin-9x-end"><oj-bind-text value="[[roleServer]]"></oj-bind-text></span>
+    </div>
     <div slot="body">
-        <div style="width:100%; border-top: 1px solid red;" class="oj-flex oj-sm-flex-items-1 oj-sm-padding-2x-bottom oj-sm-padding-2x-top">
+        <div style="width:100%; border-top: 1px solid red; border-right: 1px solid red; border-left: 1px solid red;" class="oj-flex oj-sm-flex-items-1 oj-sm-padding-2x-start oj-sm-padding-2x-bottom oj-sm-padding-2x-top">
             <span class="oj-typography-heading-md oj-flex-item">名称：<oj-bind-text value="[[roleName]]"></oj-bind-text></span>
         </div>
-        <div style="width:100%;" class="oj-flex oj-sm-flex-items-1 oj-sm-padding-2x-bottom">
+        <div style="width:100%; border-right: 1px solid red; border-left: 1px solid red;" class="oj-flex oj-sm-flex-items-1 oj-sm-padding-2x-start oj-sm-padding-2x-bottom">
             <span class="oj-typography-heading-md oj-flex-item">编号：<oj-bind-text value="[[roleID]]"></oj-bind-text></span>
             <span class="oj-typography-heading-md oj-flex-item">状态：<oj-bind-text value="[[status]]"></oj-bind-text></span>
             <span class="oj-typography-heading-md oj-flex-item">价格：<oj-bind-text value="[[rolePrice]]"></oj-bind-text>.00元</span>
             <span class="oj-typography-heading-md oj-flex-item">区服：<oj-bind-text value="[[roleServer]]"></oj-bind-text></span>
         </div>
-        <div style="width:100%; border-bottom: 1px solid red;" class="oj-flex oj-sm-flex-items-1 oj-sm-margin-10x-bottom oj-sm-padding-2x-bottom">
+        <div style="width:100%; border-bottom: 1px solid red; border-right: 1px solid red; border-left: 1px solid red;" class="oj-flex oj-sm-flex-items-1 oj-sm-padding-2x-start oj-sm-margin-5x-bottom oj-sm-padding-2x-bottom">
             <span class="oj-typography-heading-md oj-flex-item">性别：<oj-bind-text value="[[gender]]"></oj-bind-text></span>
             <span class="oj-typography-heading-md oj-flex-item">宗派：<oj-bind-text value="[[school]]"></oj-bind-text></span>
             <span class="oj-typography-heading-md oj-flex-item">实力：<oj-bind-text value="[[grade]]"></oj-bind-text></span>

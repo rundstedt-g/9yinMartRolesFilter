@@ -9,6 +9,9 @@ define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovide
             // 要搜索的名字
             this.name = ko.observable();
 
+            // 要搜索的Id
+            this.id = ko.observable();
+
             this.nameValidator = ko.observableArray([
                 new AsyncRegExpValidator({
                     pattern: '[^/\\\\:*?"<>|\]{1,5}',
@@ -17,10 +20,18 @@ define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovide
                 }),
             ]);
 
+            this.idValidator = ko.observableArray([
+                new AsyncRegExpValidator({
+                    pattern: '^[0-9]{1,7}$',
+                    hint: "",
+                    messageDetail: '只允许输入数字,且最多7位',
+                }),
+            ]);
+
             // 搜索按钮
             this.search = function () {
-                if(!this.name()){
-                    alert("请输入一个名字!");
+                if(!this.name() && !this.id()){
+                    alert("请输入一个名字或者一个编号!");
                     return;
                 }
                 if(!this.selectedServer()){
@@ -28,19 +39,35 @@ define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovide
                     return;
                 }
 
-                name = "name=" + this.name();
-                serverId = "serverId=" + this.selectedServer();
+                if(this.name()){
+                    this.id("");
+                    name = "name=" + this.name();
+                    serverId = "serverId=" + this.selectedServer();
 
-                openLoading();
-                $.ajax({
-                    url: address + "/requestByName?" + name + "&" + serverId,
-                    dataType: "json",
-                    success: function(data){
-                        loadData(data);
-                        closeLoading();
-                    }
-                });
+                    openLoading();
+                    $.ajax({
+                        url: address + "/requestByName?" + name + "&" + serverId,
+                        dataType: "json",
+                        success: function(data){
+                            loadData(data);
+                            closeLoading();
+                        }
+                    });
+                }
+                else{
+                    id = "id=" + this.id();
+                    serverId = "serverId=" + this.selectedServer();
 
+                    openLoading();
+                    $.ajax({
+                        url: address + "/requestById?" + id + "&" + serverId,
+                        dataType: "json",
+                        success: function(data){
+                            loadData(data);
+                            closeLoading();
+                        }
+                    });
+                }
                 this.switcherSelectedItem('pagingControl'); //切换到列表
             }.bind(this);
 
