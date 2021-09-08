@@ -91,7 +91,8 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
             ];
             this.clothingProvider = new PagingDataProviderView(new ArrayDataProvider(this.clothing));
 
-            this.sword = [{name:'远山行香剑', type:'单剑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/908.png'},
+            this.sword = [{name:'修竹伯玉', type:'单剑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/940.png'},
+                {name:'远山行香剑', type:'单剑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/908.png'},
                 {name:'出神入剑', type:'单剑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/893.png'},
                 {name:'莫凡剑鞘', type:'单剑', quality:'绝世', photo:'http://jishi.woniu.com/res/gui/special/card/890.png'},
                 {name:'凤舞九天剑', type:'单剑', quality:'绝世', photo:'http://jishi.woniu.com/res/gui/special/card/882.png'},
@@ -362,7 +363,8 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
             this.weapon = ko.observableArray(this.sword);
             this.weaponProvider = new PagingDataProviderView(new ArrayDataProvider(this.weapon));
 
-            this.ride = [{name:'凌踪马', type:'乘骑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/892.png'},
+            this.ride = [{name:'如云之乘', type:'乘骑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/939.png'},
+                {name:'凌踪马', type:'乘骑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/892.png'},
                 {name:'赤缨马', type:'乘骑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/847.png'},
                 {name:'傲天神行马', type:'乘骑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/468.png'},
                 {name:'飞火流星', type:'乘骑', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/436.png'},
@@ -427,7 +429,10 @@ define([ 'knockout','jquery', 'ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
             ];
 
             this.mask = [];
-            this.waist = [];
+
+            this.waist = [{name:'冰晶莲华', type:'腰饰', quality:'传说', photo:'http://jishi.woniu.com/res/gui/special/card/649.png'},
+            ];
+
             this.back = [];
 
             var accessoryMenuItems = ko.observableArray([
