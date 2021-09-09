@@ -1,0 +1,33 @@
+<div id="filter" class="filter">
+    <div class="filter_advanced">
+        <div style="width:100%;height:400px;" class="oj-panel">
+            <oj-list-view data="[[messageListDP]]" gridlines.item="visibleExceptLast" style="height:100%;">
+                <template slot="itemTemplate" data-oj-as="item">
+                    <ul>
+                        <li type="disc">
+                            <oj-list-item-layout>
+                                <div class="oj-typography-body-md">
+                                    <oj-bind-text value="[[item.data.content]]"></oj-bind-text>
+                                </div>
+                                <div slot="metadata" class="oj-typography-body-md oj-text-color-secondary">
+                                    <oj-bind-text value="[[convertTime(item.data.createTime)]]"> </oj-bind-text>
+                                </div>
+                            </oj-list-item-layout>
+                        </li>
+                    </ul>
+                </template>
+            </oj-list-view>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper_content">
+    <oj-input-text style="width:90%;" length.max="200" validators="[[messageValidator]]" clear-icon="conditional" value="{{inputMessage}}">
+    </oj-input-text>
+    <oj-button style="width:9%; float:right;" chroming="solid" on-oj-action="[[submitMessage]]">留言</oj-button>
+</div>
+
+<!--遮罩层-->
+<div class="mark loading">
+    <div></div>
+</div>

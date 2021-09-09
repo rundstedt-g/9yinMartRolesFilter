@@ -14,7 +14,7 @@ define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovide
 
             this.nameValidator = ko.observableArray([
                 new AsyncRegExpValidator({
-                    pattern: '[^/\\\\:*?"<>|\]{1,5}',
+                    pattern: '[^/\\\\:*?"<>|\]{1,200}',
                     hint: "",
                     messageDetail: '不能含有特殊字符 \\ / : * ? \" < > |',
                 }),

@@ -5,26 +5,14 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojcorerouter', 'ojs/ojurlp
             // 服务器地址
             var address = window.location.protocol + "//" + window.location.hostname + ":8080";
 
-            $.ajax({
-                url: address + "/isMaintenance",
-                dataType: "json",
-                success: function(data){
-                    if(data.isMaintenance == true){
-                        location.replace("./maintenance.html");
-                    }
-                    else{
-                        document.getElementById('updateTime').innerText = '数据更新时间：' + data.time;
-                    }
-                }
-            });
-
             // 定义路由
             var routes = [
                 { path: "", redirect: "treasure" }, // 默认路由重定向到 treasure
                 { path: "treasure"},
                 { path: "threeSkills"},
                 { path: "skin"},
-                { path: "name"}
+                { path: "name"},
+                { path: "messageBoard"}
             ];
 
             // 创建路由器

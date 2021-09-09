@@ -22,64 +22,75 @@
 </head>
 
 <body>
-<div id="particles-js" class="web_bg"></div>
-<header>
-    <img class="logo" src="css/images/logo.png">
-    <span id="updateTime"></span>
-</header>
-<div id="wrapper" class="wrapper">
-    <div id="navlist">
-        <oj-navigation-list selection="{{selection.path}}" edge="top"> <!--jet的导航列表组件-->
-            <ul class="navigation-bar"> <!--导航列表-->
-                <li id="treasure">
-                    <a href="#">
-                        <img class="navigation-icon" src="css/images/treasure.png"/>
-                        根据宝物搜索
-                    </a>
-                </li>
-                <li id="threeSkills">
-                    <a href="#">
-                        <img class="navigation-icon" src="css/images/threeSkills.png"/>
-                        根据三技能搜索
-                    </a>
-                </li>
-                <li id="skin">
-                    <a href="#">
-                        <img class="navigation-icon" src="css/images/skin.png"/>
-                        根据风物志搜索
-                    </a>
-                </li>
-                <li id="name">
-                    <a href="#">
-                        <img class="navigation-icon" src="css/images/name.png"/>
-                        根据名字搜索
-                    </a>
-                </li>
-            </ul>
-        </oj-navigation-list>
+    <div id="particles-js" class="web_bg"></div>
+    <header id="header" style="height:164px;">
+        <img class="logo" src="css/images/logo.png">
+        <div style="float: right; margin-right: 2%; width:30%; height:100%;">
+            <oj-form-layout max-columns="1" direction="row" user-assistance-density="reflow" style="height:100%;">
+                <oj-input-text value="[[updateTime]]" readonly></oj-input-text>
+                <oj-text-area value="[[affiche]]" rows="3" readonly></oj-text-area>
+            </oj-form-layout>
+        </div>
+    </header>
+    <div id="wrapper" class="wrapper">
+        <div id="navlist">
+            <oj-navigation-list selection="{{selection.path}}" edge="top"> <!--jet的导航列表组件-->
+                <ul class="navigation-bar"> <!--导航列表-->
+                    <li id="treasure">
+                        <a href="#">
+                            <img class="navigation-icon" src="css/images/treasure.png"/>
+                            根据宝物搜索
+                        </a>
+                    </li>
+                    <li id="threeSkills">
+                        <a href="#">
+                            <img class="navigation-icon" src="css/images/threeSkills.png"/>
+                            根据三技能搜索
+                        </a>
+                    </li>
+                    <li id="skin">
+                        <a href="#">
+                            <img class="navigation-icon" src="css/images/skin.png"/>
+                            根据风物志搜索
+                        </a>
+                    </li>
+                    <li id="name">
+                        <a href="#">
+                            <img class="navigation-icon" src="css/images/name.png"/>
+                            根据名字搜索
+                        </a>
+                    </li>
+                    <li id="messageBoard">
+                        <a href="#">
+                            <img class="navigation-icon" src="css/images/messageBoard.png"/>
+                            留言板
+                        </a>
+                    </li>
+                </ul>
+            </oj-navigation-list>
+        </div>
+
+        <oj-module config="[[moduleAdapter.koObservableConfig]]"></oj-module>
     </div>
 
-    <oj-module config="[[moduleAdapter.koObservableConfig]]"></oj-module>
-</div>
-
-<div class="bottom-right-corner">
-    <a class="qrcode" href="javascript:;" title="联系我们" onmouseover="myQrcodeShow()" onmouseout="myQrcodeHide()"></a>
-</div>
-
-<div id="qrcodeDialog">
-    <div class="myQrcode"></div>
-</div>
-
-<footer>
-    <div class="link_list">
-        <a class="links" href="http://jishi.woniu.com" target="_blank">九阴集市</a>
-        <a class="links" href="https://9yin.woniu.com/main.html" target="_blank">九阴官网</a>
-        <a class="links" href="https://9yin.woniu.com/wiki/" target="_blank">九阴维基</a>
-        <a class="links" href="http://9yin.azurewebsites.net/" target="_blank">永乐大典</a>
-        <a class="links" href="http://treasure.rundstedt.cn" target="_blank">宝物筛选</a>
-        <a class="links" href="http://jingmai.rundstedt.cn" target="_blank">经脉模拟</a>
+    <div class="bottom-right-corner">
+        <a class="qrcode" href="javascript:;" title="联系我们" onmouseover="myQrcodeShow()" onmouseout="myQrcodeHide()"></a>
     </div>
-</footer>
-<script type="text/javascript"  data-main="js/main" src="js/libs/require/require.js"></script>
+
+    <div id="qrcodeDialog">
+        <div class="myQrcode"></div>
+    </div>
+
+    <footer>
+        <div class="link_list">
+            <a class="links" href="http://jishi.woniu.com" target="_blank">九阴集市</a>
+            <a class="links" href="https://9yin.woniu.com/main.html" target="_blank">九阴官网</a>
+            <a class="links" href="https://9yin.woniu.com/wiki/" target="_blank">九阴维基</a>
+            <a class="links" href="http://9yin.azurewebsites.net/" target="_blank">永乐大典</a>
+            <a class="links" href="http://treasure.rundstedt.cn" target="_blank">宝物筛选</a>
+            <a class="links" href="http://jingmai.rundstedt.cn" target="_blank">经脉模拟</a>
+        </div>
+    </footer>
+    <script type="text/javascript"  data-main="js/main" src="js/libs/require/require.js"></script>
 </body>
 </html>

@@ -59,12 +59,13 @@ function myQrcodeHide(){
 }
 
 //初始化
-require(['ojs/ojbootstrap', 'knockout', 'appController', 'ojs/ojknockout', 'particles.min', 'particles-conf'],
-  function (Bootstrap, ko, app) {
+require(['ojs/ojbootstrap', 'knockout', 'appController', 'header', 'ojs/ojknockout', 'particles.min', 'particles-conf'],
+  function (Bootstrap, ko, app,header) {
       Bootstrap.whenDocumentReady().then(
           function () {
               function init() {
                   ko.applyBindings(app, document.getElementById('wrapper'));
+                  ko.applyBindings(header, document.getElementById('header'));
               }
               if (document.body.classList.contains('oj-hybrid')) {
                   document.addEventListener('deviceready', init);
