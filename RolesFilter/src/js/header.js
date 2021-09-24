@@ -8,6 +8,10 @@ define(['knockout', 'jquery',  'ojs/ojknockout', "ojs/ojformlayout", "ojs/ojinpu
 
             this.affiche = ko.observable();
 
+            var now = new Date();
+            today = now.getDate();
+            this.remainingDays = ko.observable(30 - today - 1);
+
             $.ajax({
                 url: address + "/isMaintenance",
                 dataType: "json",
