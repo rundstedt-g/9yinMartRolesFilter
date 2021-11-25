@@ -4,7 +4,7 @@ define(["knockout", 'jquery','ojs/ojarraydataprovider','ojs/ojhtmlutils',"ojs/oj
             dialogViewModel;
 
             // 服务器地址
-            address = window.location.protocol + "//" + window.location.hostname + ":8080";
+            address = window.location.protocol + "//" + window.location.hostname;
 
             switcherSelectedItem = ko.observable("load");
 
@@ -72,7 +72,7 @@ define(["knockout", 'jquery','ojs/ojarraydataprovider','ojs/ojhtmlutils',"ojs/oj
 
                 this.switcherSelectedItem('load');
                 $.ajax({
-                    url: this.address + "/getRoleContent?serverId=" + serverId + "&itemId=" + id,
+                    url: this.address + "/api/roleFilter/getRoleContent?serverId=" + serverId + "&itemId=" + id,
                     dataType: "json",
                     success: function(data){
                         this.loadRole(data);

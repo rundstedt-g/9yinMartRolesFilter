@@ -5,7 +5,7 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
     function(ko, $, Bootstrap, ArrayDataProvider, ArrayTreeDataProvider, PagingDataProviderView, HtmlUtils, Context, dialogUtil) {
         function viewModel () {
             // 服务器地址
-            var address = window.location.protocol + "//" + window.location.hostname + ":8080";
+            var address = window.location.protocol + "//" + window.location.hostname;
 
             //复选框
             this.property1 = [
@@ -260,32 +260,32 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
                         bwaStr = bwaStr + "&";
                     }
                 }
-                var skillParam = "";
+                var wuxueParam = "";
                 if(this.selectedMenuItem() != ''){
                     if(bwa.length > 0){
-                        skillParam = skillParam + "&";
+                        wuxueParam = wuxueParam + "&";
                     }
-                    skillParam = skillParam + "skill=" + this.selectedMenuItem();
+                    wuxueParam = wuxueParam + "wuxue=" + this.selectedMenuItem();
                 }
                 var is750Param = "";
                 if(this.isChecked() == true){
-                    if(bwa.length>0 || skillParam){
+                    if(bwa.length>0 || wuxueParam){
                         is750Param = is750Param + "&";
                     }
                     is750Param = is750Param + "is750=true";
                 }
 
-                var serverParam = "";
+                var serverIdParam = "";
                 if(this.selectedServer()){
-                    if(bwa.length>0 || skillParam || is750Param){
-                        serverParam =  serverParam + "&";
+                    if(bwa.length>0 || wuxueParam || is750Param){
+                        serverIdParam =  serverIdParam + "&";
                     }
-                    serverParam = serverParam + "server=" + this.selectedServer();
+                    serverIdParam = serverIdParam + "serverId=" + this.selectedServer();
                 }
 
                 openLoading();
                 $.ajax({
-                    url: address + "/byTreasure" + bwaStr + skillParam + is750Param + serverParam,
+                    url: address + "/api/roleFilter/byTreasure" + bwaStr + wuxueParam + is750Param + serverIdParam,
                     dataType: "json",
                     success: function(data){
                         loadData(data);
@@ -315,11 +315,11 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
             // 监听表格行的按钮
             this.actionListener = function (event, context) {
                 dialogUtil(
-                    context.row.roleID,
+                    context.row.role_id,
                     context.row.name,
                     context.row.price,
-                    context.row.server,
-                    context.row.serverId,
+                    context.row.server_name,
+                    context.row.server_id,
                     context.row.gender,
                     context.row.school,
                     context.row.grade,
@@ -346,14 +346,14 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
                 }
             }
             $.ajax({
-                url: address + "/getServers",
+                url: address + "/api/roleFilter/serverList",
                 dataType: "json",
                 success: function(servers){
                     loadServers(servers);
                 }
             });
             var loadServers = function (servers){
-                this.server( servers.map(item=> ({value:item.server, label:item.server})) );
+                this.server( servers.map(item=> ({value:item.id, label:item.name})) );
                 this.server.push({value:"", label:"全区全服"})
             }.bind(this);
         }

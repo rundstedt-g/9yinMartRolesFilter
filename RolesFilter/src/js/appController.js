@@ -3,7 +3,7 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojcorerouter', 'ojs/ojurlp
     function (ko, $, Bootstrap , CoreRouter, UrlParamAdapter, ModuleRouterAdapter, KnockoutRouterAdapter) {
         function ViewModel() {
             // 服务器地址
-            var address = window.location.protocol + "//" + window.location.hostname + ":8080";
+            var address = window.location.protocol + "//" + window.location.hostname;
 
             // 定义路由
             var routes = [
@@ -11,8 +11,7 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojcorerouter', 'ojs/ojurlp
                 { path: "treasure"},
                 { path: "threeSkills"},
                 { path: "skin"},
-                { path: "name"},
-                { path: "messageBoard"}
+                { path: "name"}
             ];
 
             // 创建路由器

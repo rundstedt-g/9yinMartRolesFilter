@@ -4,7 +4,7 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
     function(ko, $, ArrayDataProvider, PagingDataProviderView, HtmlUtils, dialogUtil) {
         function viewModel () {
             // 服务器地址
-            var address = window.location.protocol + "//" + window.location.hostname + ":8080";
+            var address = window.location.protocol + "//" + window.location.hostname;
             
             // 下拉框
             this.menuItems = [
@@ -174,17 +174,17 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
                         param += '&';
                     }
                 }
-                var serverParam = "";
+                var serverIdParam = "";
                 if(this.selectedServer()){
                     if(len>0){
-                        serverParam =  serverParam + "&";
+                        serverIdParam =  serverIdParam + "&";
                     }
-                    serverParam = serverParam + "server=" + this.selectedServer();
+                    serverIdParam = serverIdParam + "serverId=" + this.selectedServer();
                 }
 
                 openLoading();
                 $.ajax({
-                    url: address + "/byThreeSkills" + param + serverParam,
+                    url: address + "/api/roleFilter/byThreeSkills" + param + serverIdParam,
                     dataType: "json",
                     success: function(data){
                         loadData(data);
@@ -214,11 +214,11 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
             // 监听表格行的按钮
             this.actionListener = function (event, context) {
                 dialogUtil(
-                    context.row.roleID,
+                    context.row.id,
                     context.row.name,
                     context.row.price,
-                    context.row.server,
-                    context.row.serverId,
+                    context.row.server_name,
+                    context.row.server_id,
                     context.row.gender,
                     context.row.school,
                     context.row.grade,
@@ -245,14 +245,14 @@ define(['knockout',  'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovid
                 }
             }
             $.ajax({
-                url: address + "/getServers",
+                url: address + "/api/roleFilter/serverList",
                 dataType: "json",
                 success: function(servers){
                     loadServers(servers);
                 }
             });
             var loadServers = function (servers){
-                this.server( servers.map(item=> ({value:item.server, label:item.server})) );
+                this.server( servers.map(item=> ({value:item.id, label:item.name})) );
                 this.server.push({value:"", label:"全区全服"})
             }.bind(this);
         }

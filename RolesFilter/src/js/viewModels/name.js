@@ -4,7 +4,7 @@ define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovide
     function(ko, $, ArrayDataProvider, PagingDataProviderView, HtmlUtils, AsyncRegExpValidator, dialogUtil) {
         function viewModel () {
             // 服务器地址
-            var address = window.location.protocol + "//" + window.location.hostname + ":8080";
+            var address = window.location.protocol + "//" + window.location.hostname;
 
             // 要搜索的名字
             this.name = ko.observable();
@@ -46,7 +46,7 @@ define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovide
 
                     openLoading();
                     $.ajax({
-                        url: address + "/requestByName?" + name + "&" + serverId,
+                        url: address + "/api/roleFilter/requestByName?" + name + "&" + serverId,
                         dataType: "json",
                         success: function(data){
                             loadData(data);
@@ -60,7 +60,7 @@ define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovide
 
                     openLoading();
                     $.ajax({
-                        url: address + "/requestById?" + id + "&" + serverId,
+                        url: address + "/api/roleFilter/requestById?" + id + "&" + serverId,
                         dataType: "json",
                         success: function(data){
                             loadData(data);
@@ -117,7 +117,7 @@ define(['knockout', 'jquery','ojs/ojarraydataprovider', 'ojs/ojpagingdataprovide
             this.selectedServer = ko.observable();
 
             $.ajax({
-                url: address + "/serverList",
+                url: address + "/api/roleFilter/serverList",
                 dataType: "json",
                 success: function(servers){
                     loadServers(servers);
