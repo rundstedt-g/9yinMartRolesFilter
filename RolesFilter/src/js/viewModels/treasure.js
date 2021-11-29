@@ -315,7 +315,7 @@ define(['knockout', 'jquery', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs
             // 监听表格行的按钮
             this.actionListener = function (event, context) {
                 dialogUtil(
-                    context.row.role_id,
+                    context.row.id,
                     context.row.name,
                     context.row.price,
                     context.row.server_name,
